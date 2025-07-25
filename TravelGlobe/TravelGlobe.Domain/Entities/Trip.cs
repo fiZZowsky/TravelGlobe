@@ -1,4 +1,5 @@
-﻿using TravelGlobe.Domain.ValueObjects;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TravelGlobe.Domain.ValueObjects;
 
 namespace TravelGlobe.Domain.Entities;
 
@@ -10,10 +11,13 @@ public sealed class Trip : Entity<int>, IAggregateRoot
     public int ArrivalAirportId { get; private set; }
     public int ReturnDepartureAirportId { get; private set; }
     public int ReturnArrivalAirportId { get; private set; }
+    [NotMapped]
     public AirportCode Departure { get; private set; }
+    [NotMapped]
     public AirportCode Arrival { get; private set; }
+    [NotMapped]
     public AirportCode ReturnDeparture { get; private set; }
-    public AirportCode ReturnArrival { get; private set; }
+    [NotMapped]
     public int DistanceKm { get; private set; }
 
     private Trip() { }
