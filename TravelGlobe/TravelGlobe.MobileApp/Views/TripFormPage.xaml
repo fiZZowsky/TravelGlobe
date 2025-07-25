@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TravelGlobe.MobileApp.Views.TripFormPage"
+    Title="Nowa podróż">
+
+  <ScrollView>
+    <StackLayout Padding="10" Spacing="15">
+      <Entry Placeholder="Kod kraju (np. PL)" Text="{Binding CountryCode}" />
+      <Entry Placeholder="ID lotniska wylotu" Keyboard="Numeric" Text="{Binding DepartureAirportId}" />
+      <Entry Placeholder="ID lotniska przylotu" Keyboard="Numeric" Text="{Binding ArrivalAirportId}" />
+      <Entry Placeholder="ID lotniska powrotu (wylot)" Keyboard="Numeric" Text="{Binding ReturnDepartureAirportId}" />
+      <Entry Placeholder="ID lotniska powrotu (przylot)" Keyboard="Numeric" Text="{Binding ReturnArrivalAirportId}" />
+      <Button Text="Zapisz" Command="{Binding SaveCommand}" />
+      <Button Text="Anuluj" Command="{Binding CancelCommand}" />
+    </StackLayout>
+  </ScrollView>
+</ContentPage>
