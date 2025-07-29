@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using TravelGlobe.Application;
 using TravelGlobe.Infrastructure.Persistance;
+using TravelGlobe.Infrastructure.Seeders;
 using Microsoft.Maui.Controls.Platform;
 
 namespace TravelGlobe.MobileApp
@@ -26,10 +27,6 @@ namespace TravelGlobe.MobileApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if ANDROID
-            builder.Services.AddSingleton<IShellBottomNavViewAppearanceTracker, FloatingNavAppearanceTracker>();
-#endif
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -40,6 +37,7 @@ namespace TravelGlobe.MobileApp
             {
                 var db = scope.ServiceProvider.GetRequiredService<TravelGlobeDbContext>();
                 db.Database.EnsureCreated();
+                DatabaseSeeder.SeedAsync(db).GetAwaiter().GetResult();
             }
 
             return app;
