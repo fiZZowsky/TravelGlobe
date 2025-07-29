@@ -5,5 +5,5 @@ namespace TravelGlobe.Domain.Interfaces;
 public interface ICountryRepository
 {
     Task<Country?> GetByCodeAsync(string countryCode);
-    Task<IReadOnlyList<Country>> ListAllAsync();
+    Task<List<Country>> ListAllAsync();
 }

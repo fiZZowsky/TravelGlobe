@@ -8,7 +8,9 @@
         <Label Text="Podaj pseudonim:" />
         <Entry x:Name="nicknameEntry" />
         <Label Text="Podaj kraj pochodzenia:" />
-        <Entry x:Name="countryEntry" />
+        <Picker x:Name="countryPicker"
+                Title="Wybierz kraj"
+                ItemDisplayBinding="{Binding Name}" />
         <Button Text="Rozpocznij" Clicked="OnStartClicked" />
     </VerticalStackLayout>
 </ContentPage>

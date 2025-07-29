@@ -13,7 +13,7 @@ namespace TravelGlobe.Infrastructure.Repositories
         public async Task<Country?> GetByCodeAsync(string code) =>
             await _db.Countries.FindAsync(code);
 
-        public async Task<IReadOnlyList<Country>> ListAllAsync() =>
+        public async Task<List<Country>> ListAllAsync() =>
             await _db.Countries
                      .AsNoTracking()
                      .ToListAsync();
