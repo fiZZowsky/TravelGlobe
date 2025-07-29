@@ -22,11 +22,19 @@ public class AirportRepository : IAirportRepository
                  .Where(a => a.CountryCode == countryCode)
                  .ToListAsync();
 
-    public async Task<IReadOnlyList<Airport>> SearchByNameAsync(string query) =>
-        await _db.Airports
-                 .AsNoTracking()
-                 .Where(a => EF.Functions.Like(a.Name.ToLower(), $"%{query.ToLower()}%"))
-                 .OrderBy(a => a.Name)
-                 .Take(10)
-                 .ToListAsync();
+    public async Task<IReadOnlyList<Airport>> SearchByNameAsync(string query)
+    {
+        var normalized = query.Trim().ToLower();
+        var pattern = $"%{normalized}%";
+
+        return await _db.Airports
+            .AsNoTracking()
+            .Where(a =>
+                EF.Functions.Like(a.Name.ToLower(), pattern)
+                || EF.Functions.Like(a.City.ToLower(), pattern)
+            )
+            .OrderBy(a => a.Name)
+            .Take(5)
+            .ToListAsync();
+    }
 }

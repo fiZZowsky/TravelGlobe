@@ -13,6 +13,5 @@
     <Label Text="{Binding VisitedPercentage, StringFormat='{0}%'}" FontAttributes="Bold" />
     <Label Text="Przebyte kilometry:" />
     <Label Text="{Binding TotalDistanceKm}" FontAttributes="Bold" />
-    <Button Text="Odśwież" Command="{Binding RefreshCommand}" />
   </StackLayout>
 </ContentPage>

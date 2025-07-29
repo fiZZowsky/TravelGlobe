@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using TravelGlobe.Application;
 using TravelGlobe.Infrastructure.Persistance;
+using Microsoft.Maui.Controls.Platform;
 
 namespace TravelGlobe.MobileApp
 {
@@ -24,6 +25,10 @@ namespace TravelGlobe.MobileApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+#if ANDROID
+            builder.Services.AddSingleton<IShellBottomNavViewAppearanceTracker, FloatingNavAppearanceTracker>();
+#endif
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -9,9 +9,11 @@
             <StackLayout Padding="10" Spacing="5">
                 <SearchBar x:Name="dep" Placeholder="Lotnisko wylotu"
                            SearchCommand="{Binding SearchDepartureCommand}"
-                           SearchCommandParameter="{Binding Text, Source={x:Reference dep}}" />
+                           SearchCommandParameter="{Binding Text, Source={x:Reference dep}}"
+                           TextChanged="OnDepartureTextChanged" />
                 <CollectionView ItemsSource="{Binding DepartureResults}" SelectionMode="Single"
-                                SelectedItem="{Binding SelectedDeparture}" HeightRequest="100">
+                                SelectedItem="{Binding SelectedDeparture}" HeightRequest="100"
+                                SelectionChanged="OnDepartureSelected">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding Name}" />
@@ -21,9 +23,11 @@
 
                 <SearchBar x:Name="arr" Placeholder="Lotnisko przylotu"
                            SearchCommand="{Binding SearchArrivalCommand}"
-                           SearchCommandParameter="{Binding Text, Source={x:Reference arr}}" />
+                           SearchCommandParameter="{Binding Text, Source={x:Reference arr}}"
+                           TextChanged="OnArrivalTextChanged" />
                 <CollectionView ItemsSource="{Binding ArrivalResults}" SelectionMode="Single"
-                                SelectedItem="{Binding SelectedArrival}" HeightRequest="100">
+                                SelectedItem="{Binding SelectedArrival}" HeightRequest="100"
+                                SelectionChanged="OnArrivalSelected">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding Name}" />
@@ -34,9 +38,11 @@
                 <StackLayout IsVisible="{Binding ReturnFieldsVisible}">
                     <SearchBar x:Name="retDep" Placeholder="Lotnisko powrotu (wylot)"
                                SearchCommand="{Binding SearchReturnDepartureCommand}"
-                               SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}" />
+                               SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}"
+                               TextChanged="OnReturnDepartureTextChanged" />
                     <CollectionView ItemsSource="{Binding ReturnDepartureResults}" SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedReturnDeparture}" HeightRequest="100">
+                                    SelectedItem="{Binding SelectedReturnDeparture}" HeightRequest="100"
+                                    SelectionChanged="OnReturnDepartureSelected">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Label Text="{Binding Name}" />
@@ -46,9 +52,11 @@
 
                     <SearchBar x:Name="retArr" Placeholder="Lotnisko powrotu (przylot)"
                                SearchCommand="{Binding SearchReturnArrivalCommand}"
-                               SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}" />
+                               SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}"
+                               TextChanged="OnReturnArrivalTextChanged" />
                     <CollectionView ItemsSource="{Binding ReturnArrivalResults}" SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedReturnArrival}" HeightRequest="100">
+                                    SelectedItem="{Binding SelectedReturnArrival}" HeightRequest="100"
+                                    SelectionChanged="OnReturnArrivalSelected">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Label Text="{Binding Name}" />

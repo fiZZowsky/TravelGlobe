@@ -10,5 +10,17 @@ namespace TravelGlobe.MobileApp.Views
             InitializeComponent();
             BindingContext = viewModel;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is ProfileViewModel vm)
+            {
+                if (vm.RefreshCommand.CanExecute(null))
+                {
+                    vm.RefreshCommand.Execute(null);
+                }
+            }
+        }
     }
 }
