@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using TravelGlobe.Application;
 using TravelGlobe.Infrastructure.Persistance;
 using TravelGlobe.Infrastructure.Seeders;
-using Microsoft.Maui.Controls.Platform;
 
 namespace TravelGlobe.MobileApp
 {
@@ -25,10 +24,16 @@ namespace TravelGlobe.MobileApp
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureMauiHandlers(handlers =>
+                {
+#if ANDROID || IOS
+                    handlers.AddHandler<Shell, RoundedFloatingTabbarHandler>();
+ #endif
                 });
 
 #if DEBUG
-            builder.Logging.AddDebug();
+                    builder.Logging.AddDebug();
 #endif
 
             var app = builder.Build();

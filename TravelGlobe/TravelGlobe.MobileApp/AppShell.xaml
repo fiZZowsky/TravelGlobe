@@ -3,10 +3,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TravelGlobe.MobileApp.Views"
-    x:Class="TravelGlobe.MobileApp.AppShell">
+    x:Class="TravelGlobe.MobileApp.AppShell"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="Orange">
+
     <TabBar>
-        <ShellContent Title="Start" ContentTemplate="{DataTemplate local:HomePage}" />
-        <ShellContent Title="Mapa" ContentTemplate="{DataTemplate local:MapPage}" Icon="map.png" />
-        <ShellContent Title="Profil" ContentTemplate="{DataTemplate local:ProfilePage}" Icon="profile.png" />
+        <ShellContent Title="Start" ContentTemplate="{DataTemplate local:HomePage}" Icon="dotnet_bot.png" />
+        <ShellContent Title="Mapa" ContentTemplate="{DataTemplate local:MapPage}" Icon="dotnet_bot.png" />
+        <ShellContent Title="Profil" ContentTemplate="{DataTemplate local:ProfilePage}" Icon="dotnet_bot.png" />
     </TabBar>
 </Shell>
