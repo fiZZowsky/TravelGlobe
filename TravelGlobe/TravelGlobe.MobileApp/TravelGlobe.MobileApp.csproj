@@ -72,6 +72,9 @@
 	  <Compile Update="Views\HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\SetupPage.xaml.cs">
+	    <DependentUpon>SetupPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
   <ItemGroup>
@@ -81,9 +84,15 @@
     <MauiXaml Update="Views\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-	  <MauiXaml Update="Views\ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
+    <MauiXaml Update="Views\SetupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ProfilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SetupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
 
 </Project>

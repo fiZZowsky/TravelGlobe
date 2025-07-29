@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TravelGlobe.MobileApp.Views.SetupPage"
+    Title="Witaj">
+    <VerticalStackLayout Padding="30" Spacing="15">
+        <Label Text="Podaj pseudonim:" />
+        <Entry x:Name="nicknameEntry" />
+        <Label Text="Podaj kraj pochodzenia:" />
+        <Entry x:Name="countryEntry" />
+        <Button Text="Rozpocznij" Clicked="OnStartClicked" />
+    </VerticalStackLayout>
+</ContentPage>

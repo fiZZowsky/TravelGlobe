@@ -13,6 +13,7 @@ public static class MobileModule
         services.AddTransient<HomePage>();
         services.AddTransient<MapPage>();
         services.AddTransient<ProfilePage>();
+        services.AddTransient<SetupPage>();
 
         return services;
     }
