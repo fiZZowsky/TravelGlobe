@@ -17,8 +17,6 @@ namespace TravelGlobe.Infrastructure.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("main");
-
             // User
             modelBuilder.Entity<User>(b =>
             {

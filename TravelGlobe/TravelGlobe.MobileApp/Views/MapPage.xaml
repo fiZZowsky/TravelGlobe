@@ -31,32 +31,34 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <SearchBar x:Name="retDep" Placeholder="Lotnisko powrotu (wylot)"
-                           SearchCommand="{Binding SearchReturnDepartureCommand}"
-                           SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}" />
-                <CollectionView ItemsSource="{Binding ReturnDepartureResults}" SelectionMode="Single"
-                                SelectedItem="{Binding SelectedReturnDeparture}" HeightRequest="100">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding Name}" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <StackLayout IsVisible="{Binding ReturnFieldsVisible}">
+                    <SearchBar x:Name="retDep" Placeholder="Lotnisko powrotu (wylot)"
+                               SearchCommand="{Binding SearchReturnDepartureCommand}"
+                               SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}" />
+                    <CollectionView ItemsSource="{Binding ReturnDepartureResults}" SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedReturnDeparture}" HeightRequest="100">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding Name}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                <SearchBar x:Name="retArr" Placeholder="Lotnisko powrotu (przylot)"
-                           SearchCommand="{Binding SearchReturnArrivalCommand}"
-                           SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}" />
-                <CollectionView ItemsSource="{Binding ReturnArrivalResults}" SelectionMode="Single"
-                                SelectedItem="{Binding SelectedReturnArrival}" HeightRequest="100">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding Name}" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    <SearchBar x:Name="retArr" Placeholder="Lotnisko powrotu (przylot)"
+                               SearchCommand="{Binding SearchReturnArrivalCommand}"
+                               SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}" />
+                    <CollectionView ItemsSource="{Binding ReturnArrivalResults}" SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedReturnArrival}" HeightRequest="100">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding Name}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Spacing="5">
-                    <CheckBox IsChecked="{Binding SameReturn}" />
+                    <CheckBox IsChecked="{Binding SameReturn}" IsEnabled="{Binding SameReturnEnabled}" />
                     <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Spacing="5">

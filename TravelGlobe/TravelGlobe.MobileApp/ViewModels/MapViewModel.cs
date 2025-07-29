@@ -82,8 +82,13 @@ public class MapViewModel : BindableObject
         get => _sameReturn;
         set
         {
+            if (_sameReturn == value)
+                return;
+
             _sameReturn = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(ReturnFieldsVisible));
+
             if (_sameReturn && SelectedDeparture != null && SelectedArrival != null)
             {
                 SelectedReturnDeparture = SelectedArrival;
@@ -98,10 +103,22 @@ public class MapViewModel : BindableObject
         get => _oneWay;
         set
         {
+            if (_oneWay == value)
+                return;
+
             _oneWay = value;
+
+            if (_oneWay)
+                SameReturn = false;
+
             OnPropertyChanged();
+            OnPropertyChanged(nameof(SameReturnEnabled));
+            OnPropertyChanged(nameof(ReturnFieldsVisible));
         }
     }
+
+    public bool SameReturnEnabled => !OneWay;
+    public bool ReturnFieldsVisible => !OneWay && !SameReturn;
 
     public ICommand SearchDepartureCommand { get; }
     public ICommand SearchArrivalCommand { get; }
