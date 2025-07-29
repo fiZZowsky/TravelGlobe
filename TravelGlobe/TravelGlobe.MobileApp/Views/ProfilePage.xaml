@@ -5,13 +5,15 @@
     x:Class="TravelGlobe.MobileApp.Views.ProfilePage"
     Title="Profil">
 
-  <StackLayout Padding="10" Spacing="20">
-    <Label Text="Statystyki podróży" FontAttributes="Bold" FontSize="Medium" />
-    <Label Text="Odwiedzonych krajów:" />
-    <Label Text="{Binding VisitedCount}" FontAttributes="Bold" />
-    <Label Text="Procent świata:" />
-    <Label Text="{Binding VisitedPercentage, StringFormat='{0}%'}" FontAttributes="Bold" />
-    <Label Text="Przebyte kilometry:" />
-    <Label Text="{Binding TotalDistanceKm}" FontAttributes="Bold" />
-  </StackLayout>
+    <StackLayout Padding="10" Spacing="20">
+        <Label Text="{Binding Nickname}" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" />
+        <Label Text="{Binding Country}" FontAttributes="Italic" HorizontalOptions="Center" />
+        <Label Text="Statystyki podróży" FontAttributes="Bold" FontSize="Medium" />
+        <Label Text="Odwiedzonych krajów:" />
+        <Label Text="{Binding VisitedCount}" FontAttributes="Bold" />
+        <Label Text="Procent świata:" />
+        <Label Text="{Binding VisitedPercentage, StringFormat='{0}%'}" FontAttributes="Bold" />
+        <Label Text="Przebyte kilometry:" />
+        <Label Text="{Binding TotalDistanceKm}" FontAttributes="Bold" />
+    </StackLayout>
 </ContentPage>
