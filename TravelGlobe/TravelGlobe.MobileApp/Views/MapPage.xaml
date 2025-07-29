@@ -4,9 +4,70 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TravelGlobe.MobileApp.Views.MapPage"
     Title="Mapa">
-    <Grid RowDefinitions="*,Auto" Padding="0">
-        <WebView x:Name="MapWebView" Source="map.html" />
-        <Button Grid.Row="1" Text="Dodaj podróż" Command="{Binding AddTripCommand}" />
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+        <ScrollView>
+            <StackLayout Padding="10" Spacing="5">
+                <SearchBar x:Name="dep" Placeholder="Lotnisko wylotu"
+                           SearchCommand="{Binding SearchDepartureCommand}"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference dep}}" />
+                <CollectionView ItemsSource="{Binding DepartureResults}" SelectionMode="Single"
+                                SelectedItem="{Binding SelectedDeparture}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <SearchBar x:Name="arr" Placeholder="Lotnisko przylotu"
+                           SearchCommand="{Binding SearchArrivalCommand}"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference arr}}" />
+                <CollectionView ItemsSource="{Binding ArrivalResults}" SelectionMode="Single"
+                                SelectedItem="{Binding SelectedArrival}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <SearchBar x:Name="retDep" Placeholder="Lotnisko powrotu (wylot)"
+                           SearchCommand="{Binding SearchReturnDepartureCommand}"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}" />
+                <CollectionView ItemsSource="{Binding ReturnDepartureResults}" SelectionMode="Single"
+                                SelectedItem="{Binding SelectedReturnDeparture}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <SearchBar x:Name="retArr" Placeholder="Lotnisko powrotu (przylot)"
+                           SearchCommand="{Binding SearchReturnArrivalCommand}"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}" />
+                <CollectionView ItemsSource="{Binding ReturnArrivalResults}" SelectionMode="Single"
+                                SelectedItem="{Binding SelectedReturnArrival}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <CheckBox IsChecked="{Binding SameReturn}" />
+                    <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <CheckBox IsChecked="{Binding OneWay}" />
+                    <Label Text="Lot tylko w jedną stronę" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <WebView Grid.Row="1" x:Name="MapWebView" Source="map.html" />
+        <Button Grid.Row="2" Text="Zapisz" Command="{Binding SaveTripCommand}" />
     </Grid>
 
 </ContentPage>

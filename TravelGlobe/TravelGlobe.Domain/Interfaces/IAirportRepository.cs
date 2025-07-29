@@ -7,4 +7,5 @@ public interface IAirportRepository
     Task<Airport?> GetByIdAsync(int id);
     Task<Airport?> GetByIataAsync(string iataCode);
     Task<IReadOnlyList<Airport>> ListByCountryAsync(string countryCode);
+    Task<IReadOnlyList<Airport>> SearchByNameAsync(string query);
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Storage;
-using System.IO;
 using TravelGlobe.Application;
 using TravelGlobe.Infrastructure.Persistance;
 

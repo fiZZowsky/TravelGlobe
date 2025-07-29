@@ -5,6 +5,7 @@
     xmlns:local="clr-namespace:TravelGlobe.MobileApp.Views"
     x:Class="TravelGlobe.MobileApp.AppShell">
     <TabBar>
+        <ShellContent Title="Start" ContentTemplate="{DataTemplate local:HomePage}" />
         <ShellContent Title="Mapa" ContentTemplate="{DataTemplate local:MapPage}" Icon="map.png" />
         <ShellContent Title="Profil" ContentTemplate="{DataTemplate local:ProfilePage}" Icon="profile.png" />
     </TabBar>

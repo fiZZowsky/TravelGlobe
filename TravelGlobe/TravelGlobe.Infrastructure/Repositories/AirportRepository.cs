@@ -21,4 +21,12 @@ public class AirportRepository : IAirportRepository
                  .AsNoTracking()
                  .Where(a => a.CountryCode == countryCode)
                  .ToListAsync();
+
+    public async Task<IReadOnlyList<Airport>> SearchByNameAsync(string query) =>
+        await _db.Airports
+                 .AsNoTracking()
+                 .Where(a => EF.Functions.Like(a.Name.ToLower(), $"%{query.ToLower()}%"))
+                 .OrderBy(a => a.Name)
+                 .Take(10)
+                 .ToListAsync();
 }
