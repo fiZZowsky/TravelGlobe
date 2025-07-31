@@ -10,17 +10,20 @@ namespace TravelGlobe.Application.Services
         private readonly ICountryRepository _countryRepo;
         private readonly IAirportRepository _airportRepo;
         private readonly ITripFactory _tripFactory;
+        private readonly IUserRepository _userRepo;
 
         public TripService(
             ITripRepository tripRepo,
             ICountryRepository countryRepo,
             IAirportRepository airportRepo,
-            ITripFactory tripFactory)
+            ITripFactory tripFactory,
+            IUserRepository userRepo)
         {
             _tripRepo = tripRepo;
             _countryRepo = countryRepo;
             _airportRepo = airportRepo;
             _tripFactory = tripFactory;
+            _userRepo = userRepo;
         }
 
         public async Task<TripDTO> AddTripAsync(TripDTO req)
@@ -36,7 +39,12 @@ namespace TravelGlobe.Application.Services
             var retArrAirport = await _airportRepo.GetByIdAsync(req.ReturnArrivalAirportId)
                                ?? throw new KeyNotFoundException($"Lotnisko {req.ReturnArrivalAirportId} nie znalezione.");
 
-            var user = new User("PROFILE");
+            var user = await _userRepo.GetByIdAsync(1);
+            if (user is null)
+            {
+                user = new User("PROFILE");
+                await _userRepo.AddAsync(user);
+            }
 
             var trip = _tripFactory.Create(
                 user,

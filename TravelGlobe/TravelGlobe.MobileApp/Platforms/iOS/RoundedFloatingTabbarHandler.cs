@@ -37,9 +37,10 @@ namespace TravelGlobe.MobileApp
         {
             var existingFrame = controller.TabBar.Frame;
             double margin = 50;
-            var newX = existingFrame.X;
+
+            var newX = existingFrame.X + margin;
             var newWidth = existingFrame.Width - (2 * margin);
-            var newY = existingFrame.Height;
+            var newY = existingFrame.Y - margin;
             var newHeight = existingFrame.Height;
 
             var newRectFrame = new CGRect(newX, newY, newWidth, newHeight);

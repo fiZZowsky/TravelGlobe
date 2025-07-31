@@ -22,6 +22,12 @@ public static class DatabaseSeeder
         {
             await ExecuteSqlFromResourceAsync(db, assembly, "data_airport.sql");
         }
+
+        if (!await db.Users.AnyAsync())
+        {
+            db.Users.Add(new User("PROFILE"));
+            await db.SaveChangesAsync();
+        }
     }
 
     private static async Task ExecuteSqlFromResourceAsync(TravelGlobeDbContext db, Assembly assembly, string fileName)

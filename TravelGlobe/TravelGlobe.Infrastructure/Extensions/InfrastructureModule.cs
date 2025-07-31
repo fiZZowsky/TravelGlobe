@@ -21,6 +21,7 @@ public static class InfrastructureModule
         services.AddScoped<ITripRepository, TripRepository>();
         services.AddScoped<ICountryRepository, CountryRepository>();
         services.AddScoped<IAirportRepository, AirportRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

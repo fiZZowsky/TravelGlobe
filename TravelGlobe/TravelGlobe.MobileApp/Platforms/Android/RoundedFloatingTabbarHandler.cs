@@ -33,6 +33,8 @@ namespace TravelGlobe.MobileApp
 
             bottomView.SetBackground(tabbarDrawable);
 
+            bottomView.LabelVisibilityMode = LabelVisibilityMode.LabelVisibilityUnlabeled;
+
             LayoutParams layoutParameters = bottomView.LayoutParameters;
             if (layoutParameters is MarginLayoutParams marginLayoutParams)
             {
