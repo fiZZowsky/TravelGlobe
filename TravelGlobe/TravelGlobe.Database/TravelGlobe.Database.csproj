@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Scripts\" />
-    <Content Include="Scripts\data_airport.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\data_countries.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="Scripts" />
+    <EmbeddedResource Include="Scripts/data_airport.sql" />
+    <EmbeddedResource Include="Scripts/data_countries.sql" />
   </ItemGroup>
 
 </Project>

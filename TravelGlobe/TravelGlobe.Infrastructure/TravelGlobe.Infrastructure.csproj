@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TravelGlobe.Database\TravelGlobe.Database.csproj" />
     <ProjectReference Include="..\TravelGlobe.Domain\TravelGlobe.Domain.csproj" />
   </ItemGroup>
 
