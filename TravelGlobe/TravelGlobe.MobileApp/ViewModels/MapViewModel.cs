@@ -142,11 +142,16 @@ public class MapViewModel : BindableObject
         _ = LoadData();
     }
 
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
     public string GetMapDataJson() => JsonSerializer.Serialize(new
     {
         countries = VisitedCountryCodes,
         airports = Airports
-    });
+    }, _jsonOptions);
 
     private async Task LoadData()
     {

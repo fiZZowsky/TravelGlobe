@@ -39,10 +39,10 @@ namespace TravelGlobe.Domain.Factories
                 true,
                 user.Id,
                 country.Id,
-                departure.Code,
-                arrival.Code,
-                returnDeparture.Code,
-                returnArrival.Code,
+                departure.Id,
+                arrival.Id,
+                returnDeparture.Id,
+                returnArrival.Id,
                 totalKm);
 
             // Powiadom agregaty o nowej podróży

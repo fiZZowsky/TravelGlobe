@@ -7,6 +7,11 @@ namespace TravelGlobe.MobileApp.Views;
 
 public partial class MapPage : ContentPage
 {
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
     public MapPage(MapViewModel viewModel)
     {
         InitializeComponent();
@@ -40,7 +45,7 @@ public partial class MapPage : ContentPage
                     arrival = vm.SelectedArrival,
                     returnDeparture = vm.SelectedReturnDeparture,
                     returnArrival = vm.SelectedReturnArrival
-                });
+                }, _jsonOptions);
                 var script = $"(function(){{var d={json};updateSelection(d);}})();";
                 await MapWebView.EvaluateJavaScriptAsync(script);
             }
