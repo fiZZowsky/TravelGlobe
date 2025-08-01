@@ -19,6 +19,7 @@ public partial class MapPage : ContentPage
         MapWebView.Navigated += OnMapNavigated;
         viewModel.PropertyChanged += ViewModelOnPropertyChanged;
         viewModel.ResetRequested += OnResetRequested;
+        viewModel.MapDataUpdated += OnMapDataUpdated;
     }
 
     protected override void OnAppearing()
@@ -34,6 +35,15 @@ public partial class MapPage : ContentPage
     }
 
     private async void OnMapNavigated(object sender, WebNavigatedEventArgs e)
+    {
+        if (BindingContext is MapViewModel vm)
+        {
+            var json = vm.GetMapDataJson();
+            var script = $"(function(){{var d={json};updateVisitedCountries(d.countries);updateAirports(d.airports);}})();";
+            await MapWebView.EvaluateJavaScriptAsync(script);
+        }
+    }
+    private async void OnMapDataUpdated()
     {
         if (BindingContext is MapViewModel vm)
         {

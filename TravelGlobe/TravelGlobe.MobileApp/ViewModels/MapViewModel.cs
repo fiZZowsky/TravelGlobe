@@ -128,6 +128,7 @@ public class MapViewModel : BindableObject
     public ICommand SaveTripCommand { get; }
 
     public event Action? ResetRequested;
+    public event Action? MapDataUpdated;
 
     public MapViewModel(ITripService tripService, IAirportRepository airportRepo)
     {
@@ -172,6 +173,8 @@ public class MapViewModel : BindableObject
             await AddAirport(t.ReturnDepartureAirportId, airportIds);
             await AddAirport(t.ReturnArrivalAirportId, airportIds);
         }
+
+        MapDataUpdated?.Invoke();
     }
 
     private async Task AddAirport(int id, HashSet<int> visited)

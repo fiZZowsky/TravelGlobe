@@ -35,7 +35,7 @@
         var visited = [];
         var airports = [];
         var selected = {};
-        var routes = [];
+        var routeGroup = L.layerGroup().addTo(map);
         function updateVisitedCountries(codes) {
             visited = codes;
             if (geojsonLayer) {
@@ -53,8 +53,7 @@
         function updateSelection(d) {
             Object.values(selected).forEach(m => map.removeLayer(m));
             selected = {};
-            routes.forEach(r => { map.removeLayer(r.line); map.removeLayer(r.dec); });
-            routes = [];
+            routeGroup.clearLayers();
 
             function addMarker(key, info) {
                 if (!info) return;
@@ -69,10 +68,9 @@
 
             function addRoute(a, b) {
                 if (!a || !b) return;
-                var line = L.polyline([[a.lat, a.lon], [b.lat, b.lon]], { color: 'blue', dashArray: '5,5' }).addTo(map);
+                var line = L.polyline([[a.lat, a.lon], [b.lat, b.lon]], { color: 'blue', dashArray: '5,5' }).addTo(routeGroup);
                 var dec = L.polylineDecorator(line, { patterns: [{ offset: '100%', repeat: 0, symbol: L.Symbol.arrowHead({ pixelSize: 10, polygon: false }) }] });
-                dec.addTo(map);
-                routes.push({ line: line, dec: dec });
+                dec.addTo(routeGroup);
             }
 
             addRoute(d.departure, d.arrival);
