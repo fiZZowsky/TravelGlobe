@@ -27,6 +27,7 @@ namespace TravelGlobe.MobileApp
                 })
                 .ConfigureMauiHandlers(handlers =>
                 {
+                    handlers.AddHandler<SearchBar, NoIconSearchBarHandler>();
 #if ANDROID || IOS
                     handlers.AddHandler<Shell, RoundedFloatingTabbarHandler>();
  #endif

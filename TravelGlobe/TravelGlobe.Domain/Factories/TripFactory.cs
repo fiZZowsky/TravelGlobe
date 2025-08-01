@@ -23,7 +23,6 @@ namespace TravelGlobe.Domain.Factories
             if (user == null) throw new ArgumentNullException(nameof(user));
             if (country == null) throw new ArgumentNullException(nameof(country));
 
-            // Oblicz dystans
             var coord1 = departure.Location;
             var coord2 = arrival.Location;
             var coord3 = returnDeparture.Location;
@@ -33,11 +32,8 @@ namespace TravelGlobe.Domain.Factories
             var backDist = _calculator.Calculate(coord3, coord4);
             var totalKm = (int)Math.Round(outDist + backDist);
 
-            // Stwórz Trip
-            var trip = (Trip)Activator.CreateInstance(
-                typeof(Trip),
-                true,
-                user.Id,
+            var trip = new Trip(
+                            user.Id,
                 country.Id,
                 departure.Id,
                 arrival.Id,
@@ -45,7 +41,6 @@ namespace TravelGlobe.Domain.Factories
                 returnArrival.Id,
                 totalKm);
 
-            // Powiadom agregaty o nowej podróży
             user.AddTrip(trip);
             country.RegisterTrip(trip);
 
