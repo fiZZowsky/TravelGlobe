@@ -17,6 +17,10 @@
             Icon="map.svg"
             ContentTemplate="{DataTemplate local:MapPage}" />
         <ShellContent
+            Route="globe"
+            Icon="globe.svg"
+            ContentTemplate="{DataTemplate local:GlobePage}" />
+        <ShellContent
             Route="profile"
             Icon="user.svg"
             ContentTemplate="{DataTemplate local:ProfilePage}" />
