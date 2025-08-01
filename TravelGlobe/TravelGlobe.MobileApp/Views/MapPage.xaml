@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:HasItemsToBoolConverter x:Key="HasItemsToBoolConverter" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -86,89 +87,96 @@
                     </Frame>
                 </AbsoluteLayout>
 
-                <VerticalStackLayout IsVisible="{Binding ReturnFieldsVisible}" Spacing="6">
-                    <Label Text="Lot powrotny" FontAttributes="Bold" />
+                <Button Text="▼" Command="{Binding ToggleAdvancedCommand}" HorizontalOptions="Start"
+                        IsVisible="{Binding AdvancedVisible, Converter={StaticResource InverseBoolConverter}}" />
 
-                    <AbsoluteLayout HeightRequest="194" Margin="0,0,0,-150" IsClippedToBounds="False" ZIndex="2">
-                        <SearchBar x:Name="retDep"
-                                   Placeholder="Lotnisko powrotu (wylot)"
-                                   SearchCommand="{Binding SearchReturnDepartureCommand}"
-                                   SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}"
-                                   TextChanged="OnReturnDepartureTextChanged"
-                                   Unfocused="OnSearchBarUnfocused"
-                                   HeightRequest="44"
-                                   AbsoluteLayout.LayoutBounds="0,0,1,44"
-                                   AbsoluteLayout.LayoutFlags="WidthProportional" />
+                <VerticalStackLayout IsVisible="{Binding AdvancedVisible}" Spacing="6">
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                        <CheckBox IsChecked="{Binding SameReturn}" IsEnabled="{Binding SameReturnEnabled}" VerticalOptions="Center" />
+                        <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                        <Frame
-                                IsVisible="{Binding ReturnDepartureResults, Converter={StaticResource HasItemsToBoolConverter}}"
-                                Padding="0"
-                                CornerRadius="6"
-                                BackgroundColor="White"
-                                HasShadow="True"
-                                HorizontalOptions="Fill"
-                                VisualElement.ZIndex="10"
-                                AbsoluteLayout.LayoutBounds="0,44,1,150"
-                                AbsoluteLayout.LayoutFlags="WidthProportional">
-                            <CollectionView ItemsSource="{Binding ReturnDepartureResults}"
-                                                SelectionMode="Single"
-                                                SelectedItem="{Binding SelectedReturnDeparture}"
-                                                SelectionChanged="OnReturnDepartureSelected"
-                                                ItemsLayout="VerticalList">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Text="{Binding Name}" Padding="8" />
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </Frame>
-                    </AbsoluteLayout>
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                        <CheckBox IsChecked="{Binding OneWay}" VerticalOptions="Center" />
+                        <Label Text="Lot tylko w jedną stronę" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                    <AbsoluteLayout HeightRequest="194" Margin="0,0,0,-150" IsClippedToBounds="False" ZIndex="1">
-                        <SearchBar x:Name="retArr"
-                                   Placeholder="Lotnisko powrotu (przylot)"
-                                   SearchCommand="{Binding SearchReturnArrivalCommand}"
-                                   SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}"
-                                   TextChanged="OnReturnArrivalTextChanged"
-                                   Unfocused="OnSearchBarUnfocused"
-                                   HeightRequest="44"
-                                   AbsoluteLayout.LayoutBounds="0,0,1,44"
-                                   AbsoluteLayout.LayoutFlags="WidthProportional" />
+                    <VerticalStackLayout IsVisible="{Binding ReturnFieldsVisible}" Spacing="6">
+                        <Label Text="Lot powrotny" FontAttributes="Bold" />
 
-                        <Frame
-                                IsVisible="{Binding ReturnArrivalResults, Converter={StaticResource HasItemsToBoolConverter}}"
-                                Padding="0"
-                                CornerRadius="6"
-                                BackgroundColor="White"
-                                HasShadow="True"
-                                HorizontalOptions="Fill"
-                                VisualElement.ZIndex="10"
-                                AbsoluteLayout.LayoutBounds="0,44,1,150"
-                                AbsoluteLayout.LayoutFlags="WidthProportional">
-                            <CollectionView ItemsSource="{Binding ReturnArrivalResults}"
-                                                SelectionMode="Single"
-                                                SelectedItem="{Binding SelectedReturnArrival}"
-                                                SelectionChanged="OnReturnArrivalSelected"
-                                                ItemsLayout="VerticalList">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Text="{Binding Name}" Padding="8" />
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </Frame>
-                    </AbsoluteLayout>
+                        <AbsoluteLayout HeightRequest="194" Margin="0,0,0,-150" IsClippedToBounds="False" ZIndex="2">
+                            <SearchBar x:Name="retDep"
+                                       Placeholder="Lotnisko powrotu (wylot)"
+                                       SearchCommand="{Binding SearchReturnDepartureCommand}"
+                                       SearchCommandParameter="{Binding Text, Source={x:Reference retDep}}"
+                                       TextChanged="OnReturnDepartureTextChanged"
+                                       Unfocused="OnSearchBarUnfocused"
+                                       HeightRequest="44"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,44"
+                                       AbsoluteLayout.LayoutFlags="WidthProportional" />
+
+                            <Frame
+                                    IsVisible="{Binding ReturnDepartureResults, Converter={StaticResource HasItemsToBoolConverter}}"
+                                    Padding="0"
+                                    CornerRadius="6"
+                                    BackgroundColor="White"
+                                    HasShadow="True"
+                                    HorizontalOptions="Fill"
+                                    VisualElement.ZIndex="10"
+                                    AbsoluteLayout.LayoutBounds="0,44,1,150"
+                                    AbsoluteLayout.LayoutFlags="WidthProportional">
+                                <CollectionView ItemsSource="{Binding ReturnDepartureResults}"
+                                                    SelectionMode="Single"
+                                                    SelectedItem="{Binding SelectedReturnDeparture}"
+                                                    SelectionChanged="OnReturnDepartureSelected"
+                                                    ItemsLayout="VerticalList">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Name}" Padding="8" />
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Frame>
+                        </AbsoluteLayout>
+
+                        <AbsoluteLayout HeightRequest="194" Margin="0,0,0,-150" IsClippedToBounds="False" ZIndex="1">
+                            <SearchBar x:Name="retArr"
+                                       Placeholder="Lotnisko powrotu (przylot)"
+                                       SearchCommand="{Binding SearchReturnArrivalCommand}"
+                                       SearchCommandParameter="{Binding Text, Source={x:Reference retArr}}"
+                                       TextChanged="OnReturnArrivalTextChanged"
+                                       Unfocused="OnSearchBarUnfocused"
+                                       HeightRequest="44"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,44"
+                                       AbsoluteLayout.LayoutFlags="WidthProportional" />
+
+                            <Frame
+                                    IsVisible="{Binding ReturnArrivalResults, Converter={StaticResource HasItemsToBoolConverter}}"
+                                    Padding="0"
+                                    CornerRadius="6"
+                                    BackgroundColor="White"
+                                    HasShadow="True"
+                                    HorizontalOptions="Fill"
+                                    VisualElement.ZIndex="10"
+                                    AbsoluteLayout.LayoutBounds="0,44,1,150"
+                                    AbsoluteLayout.LayoutFlags="WidthProportional">
+                                <CollectionView ItemsSource="{Binding ReturnArrivalResults}"
+                                                    SelectionMode="Single"
+                                                    SelectedItem="{Binding SelectedReturnArrival}"
+                                                    SelectionChanged="OnReturnArrivalSelected"
+                                                    ItemsLayout="VerticalList">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Name}" Padding="8" />
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Frame>
+                        </AbsoluteLayout>
+                    </VerticalStackLayout>
+
+                    <Button Text="▲" Command="{Binding ToggleAdvancedCommand}" HorizontalOptions="Start" />
                 </VerticalStackLayout>
-
-                <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
-                    <CheckBox IsChecked="{Binding SameReturn}" IsEnabled="{Binding SameReturnEnabled}" VerticalOptions="Center" />
-                    <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
-                    <CheckBox IsChecked="{Binding OneWay}" VerticalOptions="Center" />
-                    <Label Text="Lot tylko w jedną stronę" VerticalOptions="Center" />
-                </HorizontalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
 

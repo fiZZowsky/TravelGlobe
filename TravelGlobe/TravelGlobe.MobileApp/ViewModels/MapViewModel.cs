@@ -23,6 +23,19 @@ public class MapViewModel : BindableObject
     public ObservableCollection<AirportInfo> ReturnDepartureResults { get; } = new();
     public ObservableCollection<AirportInfo> ReturnArrivalResults { get; } = new();
 
+    private bool _advancedVisible;
+    public bool AdvancedVisible
+    {
+        get => _advancedVisible;
+        set
+        {
+            if (_advancedVisible == value)
+                return;
+            _advancedVisible = value;
+            OnPropertyChanged();
+        }
+    }
+
     private AirportInfo _selectedDeparture;
     public AirportInfo SelectedDeparture
     {
@@ -126,6 +139,7 @@ public class MapViewModel : BindableObject
     public ICommand SearchReturnArrivalCommand { get; }
 
     public ICommand SaveTripCommand { get; }
+    public ICommand ToggleAdvancedCommand { get; }
 
     public event Action? ResetRequested;
     public event Action? MapDataUpdated;
@@ -141,6 +155,11 @@ public class MapViewModel : BindableObject
         SearchReturnArrivalCommand = new Command<string>(async q => await SearchAsync(q, ReturnArrivalResults, nameof(ReturnArrivalResults)));
 
         SaveTripCommand = new Command(async () => await OnSave());
+
+        ToggleAdvancedCommand = new Command(() => AdvancedVisible = !AdvancedVisible);
+
+        SameReturn = true;
+        AdvancedVisible = false;
 
         _ = LoadData();
     }
@@ -228,8 +247,9 @@ public class MapViewModel : BindableObject
         SelectedArrival = null;
         SelectedReturnDeparture = null;
         SelectedReturnArrival = null;
-        SameReturn = false;
+        SameReturn = true;
         OneWay = false;
+        AdvancedVisible = false;
         ClearResults(DepartureResults, nameof(DepartureResults));
         ClearResults(ArrivalResults, nameof(ArrivalResults));
         ClearResults(ReturnDepartureResults, nameof(ReturnDepartureResults));
@@ -278,7 +298,8 @@ public class MapViewModel : BindableObject
         SelectedReturnDeparture = null;
         SelectedReturnArrival = null;
         OneWay = false;
-        SameReturn = false;
+        SameReturn = true;
+        AdvancedVisible = false;
 
         ClearResults(DepartureResults, nameof(DepartureResults));
         ClearResults(ArrivalResults, nameof(ArrivalResults));
