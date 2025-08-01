@@ -82,7 +82,7 @@ public partial class MapPage : ContentPage
         {
             dep.Text = info.Name;
             if (BindingContext is MapViewModel vm)
-                vm.DepartureResults.Clear();
+                vm.ClearResults(vm.DepartureResults, nameof(MapViewModel.DepartureResults));
         }
     }
 
@@ -92,7 +92,7 @@ public partial class MapPage : ContentPage
         {
             arr.Text = info.Name;
             if (BindingContext is MapViewModel vm)
-                vm.ArrivalResults.Clear();
+                vm.ClearResults(vm.ArrivalResults, nameof(MapViewModel.ArrivalResults));
         }
     }
 
@@ -102,7 +102,7 @@ public partial class MapPage : ContentPage
         {
             retDep.Text = info.Name;
             if (BindingContext is MapViewModel vm)
-                vm.ReturnDepartureResults.Clear();
+                vm.ClearResults(vm.ReturnDepartureResults, nameof(MapViewModel.ReturnDepartureResults));
         }
     }
 
@@ -112,7 +112,7 @@ public partial class MapPage : ContentPage
         {
             retArr.Text = info.Name;
             if (BindingContext is MapViewModel vm)
-                vm.ReturnArrivalResults.Clear();
+                vm.ClearResults(vm.ReturnArrivalResults, nameof(MapViewModel.ReturnArrivalResults));
         }
     }
 }

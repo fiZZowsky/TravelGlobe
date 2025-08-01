@@ -132,10 +132,10 @@ public class MapViewModel : BindableObject
         _tripService = tripService;
         _airportRepo = airportRepo;
 
-        SearchDepartureCommand = new Command<string>(async q => await SearchAsync(q, DepartureResults));
-        SearchArrivalCommand = new Command<string>(async q => await SearchAsync(q, ArrivalResults));
-        SearchReturnDepartureCommand = new Command<string>(async q => await SearchAsync(q, ReturnDepartureResults));
-        SearchReturnArrivalCommand = new Command<string>(async q => await SearchAsync(q, ReturnArrivalResults));
+        SearchDepartureCommand = new Command<string>(async q => await SearchAsync(q, DepartureResults, nameof(DepartureResults)));
+        SearchArrivalCommand = new Command<string>(async q => await SearchAsync(q, ArrivalResults, nameof(ArrivalResults)));
+        SearchReturnDepartureCommand = new Command<string>(async q => await SearchAsync(q, ReturnDepartureResults, nameof(ReturnDepartureResults)));
+        SearchReturnArrivalCommand = new Command<string>(async q => await SearchAsync(q, ReturnArrivalResults, nameof(ReturnArrivalResults)));
 
         SaveTripCommand = new Command(async () => await OnSave());
 
@@ -188,11 +188,14 @@ public class MapViewModel : BindableObject
             });
     }
 
-    private async Task SearchAsync(string query, ObservableCollection<AirportInfo> target)
+    private async Task SearchAsync(string query, ObservableCollection<AirportInfo> target, string propertyName)
     {
         target.Clear();
         if (string.IsNullOrWhiteSpace(query))
+        {
+            OnPropertyChanged(propertyName);
             return;
+        }
         var results = await _airportRepo.SearchByNameAsync(query);
         foreach (var a in results)
         {
@@ -205,6 +208,13 @@ public class MapViewModel : BindableObject
                 Lon = a.Location.Longitude
             });
         }
+        OnPropertyChanged(propertyName);
+    }
+
+    public void ClearResults(ObservableCollection<AirportInfo> target, string propertyName)
+    {
+        target.Clear();
+        OnPropertyChanged(propertyName);
     }
 
     private void UpdateSelection()

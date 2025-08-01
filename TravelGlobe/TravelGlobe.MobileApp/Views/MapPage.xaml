@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:TravelGlobe.MobileApp.Converters"
     x:Class="TravelGlobe.MobileApp.Views.MapPage"
-    Title="Mapa"
+    Title="Map"
     BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
@@ -14,10 +14,8 @@
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="0">
-        <!-- Górna część: wyszukiwarki i checkboxy -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="10" Spacing="12">
-                <!-- Wylot -->
                 <VerticalStackLayout Spacing="6">
                     <AbsoluteLayout>
                         <SearchBar x:Name="dep"
@@ -54,7 +52,6 @@
                     </AbsoluteLayout>
                 </VerticalStackLayout>
 
-                <!-- Przylot -->
                 <VerticalStackLayout Spacing="6">
                     <AbsoluteLayout>
                         <SearchBar x:Name="arr"
@@ -91,11 +88,9 @@
                     </AbsoluteLayout>
                 </VerticalStackLayout>
 
-                <!-- Powrót (opcjonalnie) -->
                 <VerticalStackLayout IsVisible="{Binding ReturnFieldsVisible}" Spacing="6">
                     <Label Text="Lot powrotny" FontAttributes="Bold" />
 
-                    <!-- Powrót: wylot -->
                     <VerticalStackLayout Spacing="4">
                         <AbsoluteLayout>
                             <SearchBar x:Name="retDep"
@@ -132,7 +127,6 @@
                         </AbsoluteLayout>
                     </VerticalStackLayout>
 
-                    <!-- Powrót: przylot -->
                     <VerticalStackLayout Spacing="4">
                         <AbsoluteLayout>
                             <SearchBar x:Name="retArr"
@@ -170,7 +164,6 @@
                     </VerticalStackLayout>
                 </VerticalStackLayout>
 
-                <!-- CheckBoxy -->
                 <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
                     <CheckBox IsChecked="{Binding SameReturn}" IsEnabled="{Binding SameReturnEnabled}" VerticalOptions="Center" />
                     <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
@@ -183,10 +176,8 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Mapa -->
         <WebView Grid.Row="1" x:Name="MapWebView" Source="map.html" />
 
-        <!-- Przycisk zapisz -->
         <Button Grid.Row="2" Text="Zapisz" Command="{Binding SaveTripCommand}" Margin="10" />
     </Grid>
 </ContentPage>
