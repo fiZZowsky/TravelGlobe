@@ -33,7 +33,7 @@ namespace TravelGlobe.Domain.Factories
             var totalKm = (int)Math.Round(outDist + backDist);
 
             var trip = new Trip(
-                            user.Id,
+                user.Id,
                 country.Id,
                 departure.Id,
                 arrival.Id,

@@ -115,4 +115,15 @@ public partial class MapPage : ContentPage
                 vm.ClearResults(vm.ReturnArrivalResults, nameof(MapViewModel.ReturnArrivalResults));
         }
     }
+
+    private void OnSearchBarUnfocused(object sender, FocusEventArgs e)
+    {
+        if (BindingContext is not MapViewModel vm)
+            return;
+
+        vm.ClearResults(vm.DepartureResults, nameof(MapViewModel.DepartureResults));
+        vm.ClearResults(vm.ArrivalResults, nameof(MapViewModel.ArrivalResults));
+        vm.ClearResults(vm.ReturnDepartureResults, nameof(MapViewModel.ReturnDepartureResults));
+        vm.ClearResults(vm.ReturnArrivalResults, nameof(MapViewModel.ReturnArrivalResults));
+    }
 }
