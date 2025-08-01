@@ -12,6 +12,7 @@ public static class MobileModule
 
         services.AddTransient<HomePage>();
         services.AddTransient<MapPage>();
+        services.AddTransient<GlobePage>();
         services.AddTransient<ProfilePage>();
         services.AddTransient<SetupPage>();
 

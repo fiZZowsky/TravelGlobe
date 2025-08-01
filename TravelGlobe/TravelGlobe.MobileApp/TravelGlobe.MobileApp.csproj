@@ -68,14 +68,17 @@
     <ProjectReference Include="..\TravelGlobe.Database\TravelGlobe.Database.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Views\HomePage.xaml.cs">
-	    <DependentUpon>HomePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\SetupPage.xaml.cs">
-	    <DependentUpon>SetupPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+        <ItemGroup>
+          <Compile Update="Views\HomePage.xaml.cs">
+            <DependentUpon>HomePage.xaml</DependentUpon>
+          </Compile>
+          <Compile Update="Views\SetupPage.xaml.cs">
+            <DependentUpon>SetupPage.xaml</DependentUpon>
+          </Compile>
+          <Compile Update="Views\GlobePage.xaml.cs">
+            <DependentUpon>GlobePage.xaml</DependentUpon>
+          </Compile>
+        </ItemGroup>
 
   <ItemGroup>
     <MauiXaml Update="Views\HomePage.xaml">
@@ -88,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\ProfilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\GlobePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\SetupPage.xaml">
