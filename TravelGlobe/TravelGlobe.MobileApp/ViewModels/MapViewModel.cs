@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
+using System;
 using System.Text.Json;
 using System.Windows.Input;
 using TravelGlobe.Application;
@@ -127,6 +127,8 @@ public class MapViewModel : BindableObject
 
     public ICommand SaveTripCommand { get; }
 
+    public event Action? ResetRequested;
+
     public MapViewModel(ITripService tripService, IAirportRepository airportRepo)
     {
         _tripService = tripService;
@@ -217,6 +219,20 @@ public class MapViewModel : BindableObject
         OnPropertyChanged(propertyName);
     }
 
+    public void Reset()
+    {
+        SelectedDeparture = null;
+        SelectedArrival = null;
+        SelectedReturnDeparture = null;
+        SelectedReturnArrival = null;
+        SameReturn = false;
+        OneWay = false;
+        ClearResults(DepartureResults, nameof(DepartureResults));
+        ClearResults(ArrivalResults, nameof(ArrivalResults));
+        ClearResults(ReturnDepartureResults, nameof(ReturnDepartureResults));
+        ClearResults(ReturnArrivalResults, nameof(ReturnArrivalResults));
+    }
+
     private void UpdateSelection()
     {
         OnPropertyChanged(nameof(SelectedDeparture));
@@ -225,7 +241,10 @@ public class MapViewModel : BindableObject
     private async Task OnSave()
     {
         if (SelectedDeparture == null || SelectedArrival == null)
+        {
+            await Shell.Current.DisplayAlert("Błąd", "Wybierz lotniska wylotu i przylotu", "OK");
             return;
+        }
 
         var dto = new TripDTO
         {
@@ -236,8 +255,34 @@ public class MapViewModel : BindableObject
             ReturnArrivalAirportId = OneWay ? SelectedDeparture.Id : (SelectedReturnArrival?.Id ?? SelectedDeparture.Id)
         };
 
-        await _tripService.AddTripAsync(dto);
-        await LoadData();
+        try
+        {
+            await _tripService.AddTripAsync(dto);
+            await Shell.Current.DisplayAlert("Sukces", "Podróż została zapisana", "OK");
+            await LoadData();
+            ResetForm();
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Błąd", ex.Message, "OK");
+        }
+    }
+
+    private void ResetForm()
+    {
+        SelectedDeparture = null;
+        SelectedArrival = null;
+        SelectedReturnDeparture = null;
+        SelectedReturnArrival = null;
+        OneWay = false;
+        SameReturn = false;
+
+        ClearResults(DepartureResults, nameof(DepartureResults));
+        ClearResults(ArrivalResults, nameof(ArrivalResults));
+        ClearResults(ReturnDepartureResults, nameof(ReturnDepartureResults));
+        ClearResults(ReturnArrivalResults, nameof(ReturnArrivalResults));
+
+        ResetRequested?.Invoke();
     }
 }
 

@@ -18,6 +18,19 @@ public partial class MapPage : ContentPage
         BindingContext = viewModel;
         MapWebView.Navigated += OnMapNavigated;
         viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        viewModel.ResetRequested += OnResetRequested;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        MapWebView.Source = "map.html";
+        dep.Text = string.Empty;
+        arr.Text = string.Empty;
+        retDep.Text = string.Empty;
+        retArr.Text = string.Empty;
+        if (BindingContext is MapViewModel vm)
+            vm.Reset();
     }
 
     private async void OnMapNavigated(object sender, WebNavigatedEventArgs e)
@@ -125,5 +138,13 @@ public partial class MapPage : ContentPage
         vm.ClearResults(vm.ArrivalResults, nameof(MapViewModel.ArrivalResults));
         vm.ClearResults(vm.ReturnDepartureResults, nameof(MapViewModel.ReturnDepartureResults));
         vm.ClearResults(vm.ReturnArrivalResults, nameof(MapViewModel.ReturnArrivalResults));
+    }
+
+    private void OnResetRequested()
+    {
+        dep.Text = string.Empty;
+        arr.Text = string.Empty;
+        retDep.Text = string.Empty;
+        retArr.Text = string.Empty;
     }
 }
