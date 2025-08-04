@@ -10,7 +10,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:HasItemsToBoolConverter x:Key="HasItemsToBoolConverter" />
-            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -87,20 +86,7 @@
                     </Frame>
                 </AbsoluteLayout>
 
-                <Button Text="▼" Command="{Binding ToggleAdvancedCommand}" HorizontalOptions="Start"
-                        IsVisible="{Binding AdvancedVisible, Converter={StaticResource InverseBoolConverter}}" />
-
-                <VerticalStackLayout IsVisible="{Binding AdvancedVisible}" Spacing="6">
-                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
-                        <CheckBox IsChecked="{Binding SameReturn}" IsEnabled="{Binding SameReturnEnabled}" VerticalOptions="Center" />
-                        <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-
-                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
-                        <CheckBox IsChecked="{Binding OneWay}" VerticalOptions="Center" />
-                        <Label Text="Lot tylko w jedną stronę" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-
+                <VerticalStackLayout x:Name="AdvancedLayout" Spacing="6" IsVisible="False" Opacity="0" ScaleY="0">
                     <VerticalStackLayout IsVisible="{Binding ReturnFieldsVisible}" Spacing="6">
                         <Label Text="Lot powrotny" FontAttributes="Bold" />
 
@@ -174,9 +160,20 @@
                             </Frame>
                         </AbsoluteLayout>
                     </VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                        <CheckBox IsChecked="{Binding SameReturn}" IsEnabled="{Binding SameReturnEnabled}" VerticalOptions="Center" />
+                        <Label Text="Te same lotniska powrotne" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                    <Button Text="▲" Command="{Binding ToggleAdvancedCommand}" HorizontalOptions="Start" />
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                        <CheckBox IsChecked="{Binding OneWay}" VerticalOptions="Center" />
+                        <Label Text="Lot tylko w jedną stronę" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    
                 </VerticalStackLayout>
+
+                <Button x:Name="ToggleAdvancedButton" Text="▼" Command="{Binding ToggleAdvancedCommand}" HorizontalOptions="Start" />
+                
             </VerticalStackLayout>
         </ScrollView>
 

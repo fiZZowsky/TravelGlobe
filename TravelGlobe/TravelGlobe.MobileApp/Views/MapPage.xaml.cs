@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Linq;
 using Microsoft.Maui.Controls;
+using System.Threading.Tasks;
 using TravelGlobe.MobileApp.ViewModels;
 
 namespace TravelGlobe.MobileApp.Views;
@@ -32,6 +33,11 @@ public partial class MapPage : ContentPage
         retArr.Text = string.Empty;
         if (BindingContext is MapViewModel vm)
             vm.Reset();
+
+        AdvancedLayout.IsVisible = false;
+        AdvancedLayout.Opacity = 0;
+        AdvancedLayout.ScaleY = 0;
+        ToggleAdvancedButton.Rotation = 0;
     }
 
     private async void OnMapNavigated(object sender, WebNavigatedEventArgs e)
@@ -55,7 +61,29 @@ public partial class MapPage : ContentPage
 
     private async void ViewModelOnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(MapViewModel.SelectedDeparture) ||
+        if (e.PropertyName == nameof(MapViewModel.AdvancedVisible))
+        {
+            if (BindingContext is MapViewModel vm)
+            {
+                if (vm.AdvancedVisible)
+                {
+                    AdvancedLayout.IsVisible = true;
+                    await Task.WhenAll(
+                        AdvancedLayout.FadeTo(1, 250),
+                        AdvancedLayout.ScaleYTo(1, 250),
+                        ToggleAdvancedButton.RotateTo(180, 250));
+                }
+                else
+                {
+                    await Task.WhenAll(
+                        AdvancedLayout.FadeTo(0, 250),
+                        AdvancedLayout.ScaleYTo(0, 250),
+                        ToggleAdvancedButton.RotateTo(0, 250));
+                    AdvancedLayout.IsVisible = false;
+                }
+            }
+        }
+        else if (e.PropertyName == nameof(MapViewModel.SelectedDeparture) ||
             e.PropertyName == nameof(MapViewModel.SelectedArrival) ||
             e.PropertyName == nameof(MapViewModel.SelectedReturnDeparture) ||
             e.PropertyName == nameof(MapViewModel.SelectedReturnArrival))
