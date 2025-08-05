@@ -177,7 +177,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <WebView Grid.Row="1" x:Name="MapWebView" Source="map.html" />
+        <WebView Grid.Row="1" x:Name="MapWebView" />
 
         <Button Grid.Row="2" Text="Zapisz" Command="{Binding SaveTripCommand}" Margin="10" />
     </Grid>

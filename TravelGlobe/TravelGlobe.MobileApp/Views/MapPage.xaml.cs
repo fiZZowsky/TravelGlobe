@@ -26,7 +26,11 @@ public partial class MapPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+#if ANDROID
+        MapWebView.Source = "https://appassets.androidplatform.net/assets/map.html";
+#else
         MapWebView.Source = "map.html";
+#endif
         dep.Text = string.Empty;
         arr.Text = string.Empty;
         retDep.Text = string.Empty;

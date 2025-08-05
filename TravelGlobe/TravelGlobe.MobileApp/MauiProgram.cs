@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Handlers;
 using TravelGlobe.Application;
 using TravelGlobe.Infrastructure.Persistance;
 using TravelGlobe.Infrastructure.Seeders;
@@ -30,7 +32,14 @@ namespace TravelGlobe.MobileApp
                     handlers.AddHandler<SearchBar, NoIconSearchBarHandler>();
 #if ANDROID || IOS
                     handlers.AddHandler<Shell, RoundedFloatingTabbarHandler>();
- #endif
+#endif
+#if ANDROID
+                    handlers.AddHandler<WebView, WebViewHandler>();
+                    WebViewHandler.Mapper.AppendToMapping(nameof(LocalAssetWebViewClient), (handler, view) =>
+                    {
+                        handler.PlatformView.SetWebViewClient(new LocalAssetWebViewClient(handler.Context));
+                    });
+#endif
                 });
 
 #if DEBUG
