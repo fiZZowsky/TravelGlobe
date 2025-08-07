@@ -37,7 +37,10 @@ namespace TravelGlobe.MobileApp
                     handlers.AddHandler<WebView, WebViewHandler>();
                     WebViewHandler.Mapper.AppendToMapping(nameof(LocalAssetWebViewClient), (handler, view) =>
                     {
-                        handler.PlatformView.SetWebViewClient(new LocalAssetWebViewClient(handler.Context));
+                        if (handler.PlatformView is Android.Webkit.WebView nativeWebView)
+                        {
+                            nativeWebView.SetWebViewClient(new LocalAssetWebViewClient(nativeWebView.Context));
+                        }
                     });
 #endif
                 });
